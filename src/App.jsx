@@ -13,9 +13,7 @@ function App() {  // se llama componente
       <header className="">
         <NavBar />
       </header>
-      <ItemListContainer texto="Bienvenidos, los productos estarán disponibles a la brevedad" />
-
-
+      <ItemListContainer  />
     </div>
   );
 }
