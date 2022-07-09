@@ -4,6 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CartWidget from "../CartWidget/CartWidget";
+import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './navBar.css';
 
@@ -11,21 +13,21 @@ const NavBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
       <Container className="container-fluid">
-        <Navbar.Brand href="#home">
+        <NavLink to='/' >
           <img
             src="https://i.ibb.co/3RxqFqR/logo.png"
             height="60"
             className="d-inline-block align-top"
             alt="React Bootstrap logo"
           />
-        </Navbar.Brand>
+        </NavLink>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">Amargo</Nav.Link>
-            <Nav.Link href="#pricing">Blanco</Nav.Link>
-            <Nav.Link href="#pricing">con Leche</Nav.Link>
-            <Nav.Link href="#pricing">Rellenos</Nav.Link>
+            <NavLink to='/categoria/amargo' className={({ isActive }) => isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>Amargo</NavLink>
+            <NavLink to='/categoria/blanco' className={({ isActive }) => isActive ? 'nav-item nav-link active' : 'nav-item nav-link'} >Blanco</NavLink>
+            <NavLink to='/categoria/conleche' className={({ isActive }) => isActive ? 'nav-item nav-link active' : 'nav-item nav-link'} >con Leche</NavLink>
+            <NavLink to='/categoria/rellenos' className={({ isActive }) => isActive ? 'nav-item nav-link active' : 'nav-item nav-link'}>Rellenos</NavLink>
             <NavDropdown title="Marcas" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Milka</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -47,9 +49,13 @@ const NavBar = () => {
             <Nav.Link eventKey={2} href="#memes" className="px-4">
               FAQ
             </Nav.Link>
-            <CartWidget />
+
           </Nav>
         </Navbar.Collapse>
+        <Link to='/cart' >
+          <CartWidget />
+        </Link  >
+
       </Container>
     </Navbar>
   );
