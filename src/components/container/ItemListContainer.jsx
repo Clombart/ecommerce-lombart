@@ -14,25 +14,20 @@ const ItemListContainer = () => {
     const { categoriaId } = useParams();
 
     useEffect(() => {
-        if (categoriaId) {
-            gFetch
-                .then(resp => setProductos(resp.filter(prod => prod.categoria === categoriaId)))
-                .catch(err => console.log(err))
-                .finally(() => setLoading(false))
-
-
-        } else {
-            gFetch
-                .then(resp => setProductos(resp))
-                .catch(err => console.log(err))
-                .finally(() => setLoading(false))
-        }
-
+        gFetch
+            .then((resp) => {
+                if (!categoriaId) {
+                    setProductos(resp)
+                } else {
+                    setProductos(resp.filter(prod => prod.categoria === categoriaId))
+                }
+            })
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
     }, [categoriaId])
 
     return (
         <>
-
             {loading ? <Spinner className="position-absolute top-50 start-50" animation="border" variant="warning" role="status">
                 <span className="visually-hidden">Cargando...</span>
             </Spinner>

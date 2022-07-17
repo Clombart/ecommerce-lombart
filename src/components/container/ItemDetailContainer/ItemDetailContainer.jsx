@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from './ItemDetail';
-import gItems from '../../../helpers/gItems.jsx';
+import gFetch from '../../../helpers/Promise.jsx';
 
 import Spinner from 'react-bootstrap/Spinner';
 
 const ItemDetailContainer = () => {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { id } = useParams();
+    const { id } = useParams({});
 
     useEffect(() => {
         setTimeout(() => {
-            gItems
+            gFetch
                 .then((resp) => setProductos(
                     resp.find((prod) => prod.id === Number(id)))
                 )
