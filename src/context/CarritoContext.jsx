@@ -1,24 +1,30 @@
 import { createContext } from "react";
 import { useState } from 'react';
 
-
 export const CartContext = createContext();
 
 const CarritoContext = ({ children }) => {
   const [cart, setCart] = useState([])
 
   const agregarAlCarrito = (item) => {
-        
-    if (estaEnCarrito(item.id)){
-      //seguir intentando
-      
+
+    if (estaEnCarrito(item.item.id)) {
+      let prod = cart.find((i) => i.item.id == item.item.id);
+      console.log(prod)
+      prod.quantity += item.quantity;
     } else {
-      setCart([...cart, item]);
-      
+      cart.push(item)
     }
+    console.log(cart)
   }
+
   const estaEnCarrito = (id) => {
-    return cart.find((item) => item.id === id) ? true : false;
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].item.id === id) {
+        return true;
+      } else { return false }
+    }
+    /*return cart.find((item) => item.id === id) ? true : false;*/
   };
 
   const vaciarCarrito = (item) => {

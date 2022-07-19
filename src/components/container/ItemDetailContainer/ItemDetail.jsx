@@ -31,8 +31,8 @@ const ItemDetail = ({ item }) => {
                     <Card.Text>
                         {`$${item.precio}`}
                     </Card.Text>
-                    {/*<ItemCount stock={item.stock} initial={1} onAdd={fContador} />} ---> esta comentado porq segun la consigna hay que hacer lo de abajo, aunque no le veo mucho sentido ya que no permite seguir agrgando*/}
-                    {cantidad ?<Link to="/cart"><Button variant="outline-warning">Terminar Compra</Button></Link>: <ItemCount stock={item.stock} initial={1} onAdd={fContador} /> }
+                    {<ItemCount stock={item.stock} initial={1} onAdd={fContador} />}
+                    {/*cantidad ?<Link to="/cart"><Button variant="outline-warning">Terminar Compra</Button></Link>: null*/}
                 </Card.Body>
             </Card>
         </div>
