@@ -6,10 +6,15 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import CartWidget from "../CartWidget/CartWidget";
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { CartContext } from '../../context/CarritoContext';
+import { useContext } from 'react'
 
 import './navBar.css';
 
+
 const NavBar = () => {
+  const { cantidadTotal } = useContext(CartContext)
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
       <Container className="container-fluid">
@@ -53,9 +58,12 @@ const NavBar = () => {
           </Nav>
         </Navbar.Collapse>
         <Link to='/cart' >
-          <CartWidget />
-        </Link  >
+          <div className='d-flex'>
+            <CartWidget />
+            {cantidadTotal() !==0 && cantidadTotal()}   
+          </div>
 
+        </Link  >
       </Container>
     </Navbar>
   );

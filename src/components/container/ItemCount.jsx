@@ -1,10 +1,11 @@
 import { useState } from "react"
 
 import Button from 'react-bootstrap/Button';
-import productos from "../../helpers/arrayProductos.jsx";
+
+
 
 const ItemCount = ({ stock, onAdd, initial }) => {
-    const [ count, setCount ] = useState(initial)
+    const [count, setCount] = useState(initial)
 
     const restar = () => {
         if (count > initial) {
@@ -19,10 +20,13 @@ const ItemCount = ({ stock, onAdd, initial }) => {
 
     return (
         <div>
-            <span onClick={restar}>-</span>
-            <span>{count}</span>
-            <span onClick={sumar}>+</span>
-            <Button variant="outline-warning" disabled={count>stock} onClick ={()=>onAdd(count)}>Agregar</Button>
+            <div className="input-group mb-3">
+                <button className="btn btn-outline-secondary" type="button" onClick={restar}>-</button>
+                <input type="number" className="form-control" placeholder={count}></input>
+                <button className="btn btn-outline-secondary" type="button"onClick={sumar}>+</button>    
+            </div>
+            <Button variant="outline-warning" disabled={count > stock} onClick={() => onAdd(count)}>Agregar</Button>
+            
         </div>
     )
 }
