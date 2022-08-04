@@ -8,15 +8,14 @@ import Button from 'react-bootstrap/Button';
 
 const ItemDetail = ({ item }) => {
 
-    const {agregarAlCarrito, cantidadTotal}= useContext(CartContext)
+    const { agregarAlCarrito } = useContext(CartContext)
 
     const [cantidad, setCantidad] = useState()
 
     const onAdd = (contador) => {
         setCantidad(contador)
-        const producto = {item: item, cantidad: contador }
-        agregarAlCarrito({ ...producto, cantidad: contador})
-        
+        const producto = { item: item, cantidad: contador }
+        agregarAlCarrito(producto)
     }
 
     return (
@@ -35,7 +34,7 @@ const ItemDetail = ({ item }) => {
                         {`$${item.precio}`}
                     </Card.Text>
                     <ItemCount stock={item.stock} initial={1} onAdd={onAdd} />
-                   
+
                     <Link to="/cart"><Button variant="outline-warning">Terminar Compra</Button></Link>
                 </Card.Body>
             </Card>
