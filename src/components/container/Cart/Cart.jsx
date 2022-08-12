@@ -1,52 +1,63 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom';
-import { CartContext } from '../../../context/CarritoContext';
-import ItemCarrito from './ItemCarrito'
+import Button from 'react-bootstrap/Button';
+
+import { CartContext } from '../../../context/CartContextProvider';
+import ItemCart from '../../ItemCart/ItemCart'
+import ModalComponentForm from '../../ModalComponentForm/ModalComponentForm';
+import EmptyCart from '../../EmptyCart/EmptyCart';
+
+import './cart.css';
+
 
 const Cart = () => {
 
   const {
     cart,
-    vaciarCarrito,
-    totalAPagar,
-    cantidadTotal,
+    emptyCart,
+    totalPrice,
+    totalAmount,
+    handleShow,
 
   } = useContext(CartContext)
-  cantidadTotal()
+  totalAmount()
 
-  
+
   return (
-    <div>
-      <h1>Carrito</h1>
-      {(cart.length)?
-        
-       <div className="d-flex flex-row w=100">
-        <ul className="w-50">
-          {cart.map((producto) =>   
-            <ItemCarrito item={producto} key={producto.item.id}/>
-          )}
-        </ul>
+    <div className="container-fluid px-0">
+      <h1 className="my-4">Carrito</h1>
+      {(cart.length)
+        ?
+        <div className="container-fluid change px-0">
+          <ul className="px-0">
+            {cart.map((product) =>
+              <ItemCart item={product} key={product.item.id} />
+            )}
+          </ul>
 
-        <div className="w-50">
-          <div className=" d-flex flex-row w=100 justify-content-center px-2 mb-5">
-            <h3 className="my-2">Cantidad de Productos:</h3>
-            <h3 id="total" className="my-2">{cantidadTotal()}</h3>
-          </div>
-          <div className=" d-flex flex-row w=100 justify-content-evenly px-2 mb-5">
-            <h3 className="my-2">Total</h3>
-            <h3 id="total" className="my-2">${totalAPagar()}</h3>
-          </div>
+          <div className="g-container mt-2">
+            <div className=" d-flex flex-column mx-auto justify-content-center px-2">
+              <div className="my-3">
+                <h4 className="my-1">Cantidad de Productos:</h4>
+                <h4 className="my-1">{totalAmount()}</h4>
+              </div>
+              <h3 className="my-2">Total: ${totalPrice()}</h3>
+            </div>
 
-          <div className=" d-flex flex-row w=100 justify-content-evenly px-2 mb-5">
-            <button onClick={vaciarCarrito}>Vaciar Carrito</button>
-            <button>Terminar Compra</button>
+            <div className="containerButtons">
+              <Button variant="warning" onClick={handleShow}>Finalizar Compra</Button>
+              <ModalComponentForm />
+              <Link to={`/`}>
+                <Button variant="success w-100">Seguir Comprando</Button>
+              </Link>
+              <Button variant="danger" onClick={emptyCart}>Vaciar Carrito</Button>
+            </div>
           </div>
         </div>
-      </div>
 
-        : <>
-          <h2>No hay productos en el carrito</h2>
-          <Link to='/'><button> Elegir Productos</button></Link>
+        :
+        <>
+          <EmptyCart />
         </>
       }
     </div>
@@ -54,20 +65,3 @@ const Cart = () => {
 }
 
 export default Cart
-
-{/*<ul className="w-50">
-          {cart.map((producto,i) => {
-            return (
-              <>
-                <li className="list-group" key={i} >
-                  <ItemCarrito item={producto}  />
-                </li>
-              </>
-            )
-          })}
-        </ul>
-
-
-        {/* {
-    totalAPagar() !==0 && totalAPagar()
-  }  */}

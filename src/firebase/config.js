@@ -13,6 +13,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 //funcion para exportar el app
-export default function iniFirestore(){
-    return app
+export default function iniFirestore() {
+  return app
 }

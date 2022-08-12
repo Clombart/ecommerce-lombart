@@ -1,33 +1,33 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
 import NavBar from './components/NavBar/NavBar';
-import ItemListContainer from './components/container/ItemListContainer';
+
 import Cart from './components/container/Cart/Cart';
 import ItemDetailContainer from './components/container/ItemDetailContainer/ItemDetailContainer';
-import CarritoContext from './context/CarritoContext';
+import CartContextProvider from './context/CartContextProvider';
+import ItemListContainer from './components/container/ItemListContainer/ItemListContainer';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function App() {  // se llama componente
+function App() {
   return (
-    <CarritoContext>
+    <CartContextProvider>
       <BrowserRouter>
-        <div className="App">
-          <header className="">
+        <div className="App container-fluid">
+          <header className="App-header ">
             <NavBar />
           </header>
           <Routes>
             <Route index path='/' element={<ItemListContainer />} />
-            <Route path='/categoria/:categoriaId' element={<ItemListContainer />} />
+            <Route path='/categoria/:idCategory' element={<ItemListContainer />} />
             <Route path='/item/:id' element={<ItemDetailContainer />} />
-            <Route path='/cart' element={<Cart />} />
-            <Route path='*' element={<Navigate to='/' />} /> //podria ser to='/404' siempre que antes tengamos el componente 404notfound.jsx y la route preestablecida.
+            <Route path='/carrito' element={<Cart />} />
+            <Route path='*' element={<Navigate to='/' />} />
           </Routes>
         </div>
       </BrowserRouter>
-    </CarritoContext>
+    </CartContextProvider>
   );
 }
 

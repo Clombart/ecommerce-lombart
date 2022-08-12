@@ -1,13 +1,18 @@
-import { useContext, useState } from 'react';
-import { CartContext } from '../../context/CarritoContext';
+import { useContext } from 'react';
+import { CartContext } from '../../context/CartContextProvider';
 
-import './cart.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+
+import './cartWidget.css';
 
 const CartWidget = () => {
-  
+  const { totalAmount } = useContext(CartContext)
+
   return (
-    <div className="carrito-container">
-      <img src="https://www.ubolosoft.com/Carrito/images/carrito.png" alt="icono carrito" className="carrito-icono" />
+    <div className='d-flex'>
+      <FontAwesomeIcon icon={faCartShopping} className="cartButton" />
+      {totalAmount() !== 0 && <h5 className='counter'> {totalAmount()}</h5>}
     </div>
   )
 }
