@@ -82,7 +82,7 @@ const CartContextProvider = ({ children }) => {
 
   //cantidad total de productos
   const totalAmount = () => {
-    return cart.reduce((counter, prodObj) => counter += prodObj.amount, 0)
+    return cart.reduce((counter, prod) => counter += prod.amount, 0)
   }
 
   //Modal Form
