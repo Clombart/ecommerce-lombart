@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import swal from '@sweetalert/with-react';
 
 
 export const CartContext = createContext();
@@ -46,32 +45,9 @@ const CartContextProvider = ({ children }) => {
     saveAtLocalStorage('cartList', []);
   }
 
-  //vaciar carrito con SWAL
+  //vaciar carrito SIN SWAL
   const emptyCart = () => {
-    swal({
-      title: "Estás seguro?",
-      text: "Una vez vaciado, deberás seleccionar los productos nuevamente!",
-      icon: "warning",
-      buttons: ["Cancelar", "Sí!"],
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-          swal("El carrito ha sido eliminado", {
-          icon: "success",
-          buttons: false,
-          timer: 2000,
-         });
-        setTimeout(() => {
-          resetCart()
-        }, 1000);
-       } else {
-         swal("Tu carrito está a salvo!", {
-          buttons: false,
-          timer: 2000,
-        });
-      }
-    });
+    resetCart()
   };
 
 
