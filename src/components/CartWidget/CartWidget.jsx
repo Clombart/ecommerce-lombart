@@ -7,12 +7,12 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import './cartWidget.css';
 
 const CartWidget = () => {
-  const { totalAmount } = useContext(CartContext)
+  const { cart, totalAmount } = useContext(CartContext)
 
   return (
     <div className='d-flex'>
       <FontAwesomeIcon icon={faCartShopping} className="cartButton" />
-      {totalAmount() !== 0 && <h5 className='counter'> {totalAmount()}</h5>}
+      {cart.length !== 0 && <h5 className='counter'> {totalAmount()}</h5>}
     </div>
   )
 }
